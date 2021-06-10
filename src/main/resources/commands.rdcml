@@ -1,14 +1,14 @@
 dolphin-util {
-	help /dolphin-util <arguments...>
+	help This command do not have any feature.
 	
 	fetch-url string:url string:targetPath {
-		help /dolphin-util fetch-url <string:url> <string:targetPath(path seperators should be '|')>
+		help Download a file and overwrite a local file with it. Notice that the path seperators in argument 'targetPath' should be '|'.
 		permission dolphin-utility.access.fetch-url
 		hook dolphin-util.fetch-url
 	}
 	
 	config-reload {
-		help /dolphin-util config-reload
+		help Reload the config.
 		permission dolphin-utility.access.reload-config
 		hook dolphin-util.reload-config
 	}
