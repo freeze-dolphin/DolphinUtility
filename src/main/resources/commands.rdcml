@@ -1,0 +1,15 @@
+dolphin-util {
+	help /dolphin-util <arguments...>
+	
+	fetch-url string:url string:targetPath {
+		help /dolphin-util fetch-url <string:url> <string:targetPath(path seperators should be '|')>
+		permission dolphin-utility.access.fetch-url
+		hook dolphin-util.fetch-url
+	}
+	
+	config-reload {
+		help /dolphin-util config-reload
+		permission dolphin-utility.access.reload-config
+		hook dolphin-util.reload-config
+	}
+}

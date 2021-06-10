@@ -1,0 +1,13 @@
+[features.fetch-url]
+
+# URL of these following hosts will not be fetched
+limited-hosts = [ "www.baidu.com" ]
+
+# Max volume of the file to be fetched, parsed in 'M(ega) B(yte)', written in 'B(yte)'
+max-volume = 10485760
+
+# Just keep it as default
+ua = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41"
+
+# Parsed in 'ms', just keep it as default (0.9s)
+time-out = 9000

@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://json.schemastore.org/bukkit-plugin
+main: io.freeze_dolphin.dolphin_utility.PlugEntry
+version: ${project.version}
+name: ${project.name}
+prefix: ${project.name}
+api-version: 1.14
+depend:
+- RedLib
+permissions:
+   dolphin-utility.access.*:
+      default: op
+      children:
+         dolphin-utility.access.git-fetch: true
+         dolphin-utility.access.reload-config: true
