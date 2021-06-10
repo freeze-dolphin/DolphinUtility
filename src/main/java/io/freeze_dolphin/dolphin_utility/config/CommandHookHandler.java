@@ -14,6 +14,7 @@ import org.tomlj.Toml;
 
 import io.freeze_dolphin.dolphin_utility.PlugEntry;
 import io.freeze_dolphin.dolphin_utility.network.DownloadUtils;
+
 import redempt.redlib.commandmanager.CommandHook;
 
 public class CommandHookHandler {
@@ -25,8 +26,8 @@ public class CommandHookHandler {
 	}
 
 	@CommandHook("dolphin-util.fetch-url")
-	public void fetch_url(CommandSender sender, String url, String targetPath) {
-		new FetchUrlThread(this.plug, sender, url, targetPath).start();
+	public void fetch_url(CommandSender sender, boolean ignore_check, String url, String target_path) {
+		new FetchUrlThread(this.plug, sender, url, target_path, ignore_check).start();
 	}
 
 	private static class FetchUrlThread extends Thread {
@@ -35,21 +36,37 @@ public class CommandHookHandler {
 
 		private CommandSender sender;
 		private String url;
-		private String targetPath;
+		private String target_path;
+		private boolean ignore_check;
 		private PlugEntry plug;
 
-		public FetchUrlThread(PlugEntry plug, CommandSender sender, String url, String targetPath) {
+		public FetchUrlThread(PlugEntry plug, CommandSender sender, String url, String target_path,
+				boolean ignore_check) {
 			this.url = url;
 			this.plug = plug;
 			this.sender = sender;
-			this.targetPath = targetPath;
+			this.target_path = target_path;
+			this.ignore_check = ignore_check;
 		}
 
 		public void run() {
-			File target = new File(targetPath.replaceAll("\\|", Matcher.quoteReplacement(File.separator)));
-			if (target.isFile()) {
-				ConfigGetter cg = new ConfigGetter(this.plug);
+			File target = new File(target_path.replaceAll("\\|", Matcher.quoteReplacement(File.separator)));
+			ConfigGetter cg = new ConfigGetter(this.plug);
+
+			boolean check_pass = false;
+			{ // check
+				if (this.ignore_check) {
+					check_pass = true;
+				} else {
+					if (target.exists() && target.isFile() && target.canRead() && target.canWrite()) {
+						check_pass = true;
+					}
+				}
+			}
+
+			if (check_pass) {
 				if (this.plug.config.contains(CONFIG_PREFIX + "limited-hosts")) {
+
 					for (Object limited_host : this.plug.config.getArray(CONFIG_PREFIX + "limited-hosts").toList()) {
 						if (url.matches("http.*\\/\\/" + limited_host + "\\/.*")) {
 							sender.sendMessage(
@@ -65,6 +82,7 @@ public class CommandHookHandler {
 						sender.sendMessage(msg("Checking file volume..."));
 						if (volume_check) {
 							sender.sendMessage(msg("This file is too large!"));
+							this.interrupt();
 							return;
 						}
 					} catch (IOException e) {
@@ -94,18 +112,22 @@ public class CommandHookHandler {
 						fos.close();
 						sender.sendMessage(msg(ChatColor.translateAlternateColorCodes('&',
 								"&aSucceeded! &rYour file has been saved into: " + target.getPath())));
+						this.interrupt();
+						return;
 					} catch (Exception e) {
 						if (sender instanceof Player) {
-							((Player) sender)
-									.sendMessage(msg("Unable to overwrite existed target file: " + target.getPath()));
+							((Player) sender).sendMessage(msg(ChatColor.translateAlternateColorCodes('&',
+									"&cFailed! &rUnable to overwrite existed target file: " + target.getPath())));
+							this.interrupt();
+							return;
 						} else {
 							e.printStackTrace();
 						}
 					}
 				}
-
 			} else {
 				sender.sendMessage(msg("Invaild target path!"));
+				this.interrupt();
 				return;
 			}
 		}
