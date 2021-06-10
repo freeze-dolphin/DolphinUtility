@@ -1,7 +1,7 @@
 dolphin-util {
 	help This command do not have any feature.
 	
-	fetch-url --ignore_check string:url string:targetPath {
+	fetch-url --ignore-check string:url string:targetPath {
 		help Download a file and overwrite a local file with it. Notice that the path seperators in argument 'targetPath' should be '|'. Attach '--ignore_check' flag with it to ignore path check.
 		permission dolphin-utility.access.fetch-url
 		hook dolphin-util.fetch-url
