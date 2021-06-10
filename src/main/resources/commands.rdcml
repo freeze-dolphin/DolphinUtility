@@ -1,0 +1,13 @@
+dolphin-util {
+	nohelp
+	fetch-url string:url string:targetPath {
+		nohelp
+		permission dolphin-utility.access.fetch-url
+		hook dolphin-util.fetch-url
+	}
+	config-reload {
+		nohelp
+		permission dolphin-utility.access.reload-config
+		hook dolphin-util.reload-config
+	}
+}
