@@ -47,7 +47,7 @@ public class CommandHookHandler {
 
 		public void run() {
 			File target = new File(targetPath.replaceAll("\\|", Matcher.quoteReplacement(File.separator)));
-			if (target.isFile() && target.canRead() && target.canWrite()) {
+			if (target.isFile()) {
 				ConfigGetter cg = new ConfigGetter(this.plug);
 				if (this.plug.config.contains(CONFIG_PREFIX + "limited-hosts")) {
 					for (Object limited_host : this.plug.config.getArray(CONFIG_PREFIX + "limited-hosts").toList()) {
