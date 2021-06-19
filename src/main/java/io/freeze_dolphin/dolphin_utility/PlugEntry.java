@@ -10,7 +10,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.tomlj.Toml;
 import org.tomlj.TomlParseResult;
 
-import io.freeze_dolphin.dolphin_utility.config.CommandHookHandler;
+import io.freeze_dolphin.dolphin_utility.command.CommandHookHandler;
+
 import redempt.redlib.commandmanager.CommandParser;
 
 public final class PlugEntry extends JavaPlugin {
