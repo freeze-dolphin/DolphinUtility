@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.freeze-dolphin</groupId>
 	<artifactId>dolphin-utility</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<name>DolphinUtility</name>
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
