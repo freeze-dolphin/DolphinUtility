@@ -2,15 +2,20 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>io.freeze-dolphin</groupId>
 	<artifactId>dolphin-utility</artifactId>
-	<version>0.1.1</version>
+
+	<version>0.1.2</version>
+
 	<name>DolphinUtility</name>
+
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
 	<repositories>
 		<repository>
 			<id>jitpack.io</id>
@@ -21,6 +26,7 @@
 			<url>https://repo.ptms.ink/repository/maven-releases/</url>
 		</repository>
 	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>ink.ptms.core</groupId>
@@ -31,7 +37,7 @@
 		<dependency>
 			<groupId>com.github.Redempt</groupId>
 			<artifactId>RedLib</artifactId>
-			<version>5.0.2</version>
+			<version>5.0.4</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -41,14 +47,17 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
+
 	<build>
-		<finalName>${project.name} v${project.version}</finalName>
+
+		<finalName>${project.name}-${project.version}</finalName>
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
 				<filtering>true</filtering>
 			</resource>
 		</resources>
+
 		<plugins>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -77,5 +86,7 @@
 				</executions>
 			</plugin>
 		</plugins>
+
 	</build>
+
 </project>

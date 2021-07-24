@@ -1,15 +1,23 @@
-dolphin-util {
-	help This command do not have any feature.
-	
-	fetch-url --ignore-check string:url string:targetPath {
+dolphinutil {
+
+    permission dolphin-utility.cmd
+
+	fetch --ignore-check string:url string:targetPath {
 		help Download a file and overwrite a local file with it. Notice that the path seperators in argument 'targetPath' should be '|'. Attach '--ignore_check' flag with it to ignore path check.
-		permission dolphin-utility.access.fetch-url
-		hook dolphin-util.fetch-url
+		permission dolphin-utility.cmd.fetch-url
+		hook fetch
+	}
+
+	dump {
+	    user player
+	    help Dump the item you hold into local yaml file.
+	    permission dolphin-utility.cmd.dump-item
+	    hook dump
 	}
 	
-	config-reload {
+	reload {
 		help Reload the config.
-		permission dolphin-utility.access.reload-config
-		hook dolphin-util.reload-config
+		permission dolphin-utility.cmd.reload
+		hook reload
 	}
 }
